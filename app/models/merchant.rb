@@ -56,14 +56,4 @@ class Merchant < ApplicationRecord
     .limit(1)
     .first
   end
-
-  def merch_discount_revenue
-    x = invoice_items.
-    joins(item: {merchant: :bulk_discounts}).
-    select("invoice_items.*, MAX((invoice_items.quantity * invoice_items.unit_price) * bulk_discounts.percentage_discount / 100) AS discount_amount").
-    where("invoice_items.quantity >= bulk_discounts.quantity_threshold").
-    group(:id)
-
-    x.sum(&:discount_amount)
-  end
 end

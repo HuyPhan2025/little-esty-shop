@@ -27,7 +27,6 @@ class Admin::MerchantsController < ApplicationController
     end
   end
 
-
   def create
     merchant = Merchant.create!(merchant_params)
     redirect_to admin_merchants_path
